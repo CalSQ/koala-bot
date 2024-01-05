@@ -15,8 +15,6 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     const kickedAt = new Date();
     if (firstEntry) guildData.values.lastLog = firstEntry.id;
 
-    console.log(logs)
-
     if (firstEntry) {
         // Get log channel
         const channelId = guildData.values.options.modLog;
