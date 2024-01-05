@@ -17,6 +17,8 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     const firstEntry = logs.entries.first();
     const kickedAt = new Date();
     
+    console.log(logs)
+
     if (firstEntry) {
         const executor = firstEntry.executorId && await client.users.fetch(firstEntry.executorId);
         const logCount = ++guildData.values.modLogCount;
