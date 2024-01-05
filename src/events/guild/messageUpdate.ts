@@ -7,7 +7,7 @@ export default event(Events.MessageUpdate, false, async ({ client }, oldMessage,
     const guildData = await Guild.getById(newMessage.guildId);
     const channelId = guildData.values.options.messageLog;
     if (channelId && channelId !== newMessage.channelId) {
-        const channel = client.channels.cache.get(channelId) ?? await client.channels.fetch(channelId);
+        const channel = client.channels.cache.get(channelId);
         if (!channel?.isTextBased()) return;
         const Embed = new EmbedBuilder()
             .setAuthor({ name: "by @" + newMessage.author.username, iconURL: newMessage.author.displayAvatarURL() })

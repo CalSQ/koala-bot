@@ -6,7 +6,7 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     const guildData = await Guild.getById(member.guild.id);
     const channelId = guildData.values.options.memberLog;
     if (!channelId) return;
-    const channel = client.channels.cache.get(channelId) ?? await client.channels.fetch(channelId);
+    const channel = client.channels.cache.get(channelId);
     if (!channel?.isTextBased()) return;
 
     const Embed = new EmbedBuilder()

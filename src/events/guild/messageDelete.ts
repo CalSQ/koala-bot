@@ -7,7 +7,7 @@ export default event(Events.MessageDelete, false, async ({ client }, message) =>
     const guildData = await Guild.getById(message.guildId);
     const channelId = guildData.values.options.messageLog;
     if (channelId && channelId !== message.channelId) {
-        const channel = client.channels.cache.get(channelId) ?? await client.channels.fetch(channelId);
+        const channel = client.channels.cache.get(channelId);
         if (!channel?.isTextBased()) return;
 
         const infractionEmbed = new EmbedBuilder()
