@@ -26,7 +26,8 @@ export interface Config {
             timeout?: ColorResolvable,
             untimeout?: ColorResolvable,
             kick?: ColorResolvable,
-            ban?: ColorResolvable
+            ban?: ColorResolvable,
+            unban?: ColorResolvable
         },
         memberLog: {
             join?: ColorResolvable,

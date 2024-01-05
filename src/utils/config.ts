@@ -24,7 +24,8 @@ export const config = {
             timeout: "#c12a22",
             untimeout: "#c12a22",
             kick: "#c12a22",
-            ban: "#c12a22"
+            ban: "#c12a22",
+            unban: "#c12a22"
         },
         memberLog: {
             join: "#3ac122",
