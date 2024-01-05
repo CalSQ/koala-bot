@@ -26,7 +26,7 @@ export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, 
     const infractionLog = new EmbedBuilder()
         .setAuthor({name: `${user.username}`, iconURL: user.displayAvatarURL()})
         .setDescription(`**User**: ${user}\n**Action:** Ban\n**Reason:** ${reason ?? "Not provided"}\n\nModerated by ${executor ?? "unknown"}`)
-        .setFooter({text: `Modlog #`})
+        .setFooter({text: `Modlog #${logCount}`})
         .setTimestamp(bannedAt);
     channel.send({embeds: [infractionLog]});
 
