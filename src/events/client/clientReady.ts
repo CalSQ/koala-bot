@@ -2,7 +2,7 @@ import { ButtonStyle, Events, MessageActionRowComponentBuilder } from "discord.j
 import { ButtonBuilder, ActionRowBuilder } from "discord.js";
 import { event } from "../../interfaces";
 
-export default event(Events.ClientReady, false, async ({ client }) => {
+export default event(Events.ClientReady, true, async ({ client }) => {
     console.log(`${client.user?.username} has logged in!`);
     await client.deploy();
 
