@@ -2,7 +2,7 @@ import { AuditLogEvent, EmbedBuilder, Events } from "discord.js";
 import { Guild, Member } from "../../models";
 import { Infraction, event } from "../../interfaces";
 
-export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, reason = "Not provided", guild }) => {
+export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, reason, guild }) => {
     // Get log channel and increment mod log count
     const guildData = await Guild.getById(guild.id);
     const channelId = guildData.values.options.modLog;
@@ -14,18 +14,19 @@ export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, 
 
     // Get audit log
     const logs = await guild.fetchAuditLogs({
-        type: AuditLogEvent.MessageDelete,
+        type: AuditLogEvent.MemberBanAdd,
         limit: 1,
     });
     const firstEntry = logs.entries.first();
     const executor = firstEntry?.executorId && await client.users.fetch(firstEntry.executorId);
-    const bannedAt = Date.now() * 1000;
+    const bannedAt = new Date();
+    reason = reason ?? firstEntry?.reason
     
     // Send formatted log in logs channel
     const infractionLog = new EmbedBuilder()
-        .setAuthor({name: `${user.username} (${user.id})`, iconURL: user.displayAvatarURL()})
-        .setDescription(`**Action:** Ban\n**Reason:** ${reason}\n\nModerated by ${executor ?? "unknown"}`)
-        .setFooter({text: `Modlog #${logCount}`})
+        .setAuthor({name: `${user.username}`, iconURL: user.displayAvatarURL()})
+        .setDescription(`**User**: ${user}\n**Action:** Ban\n**Reason:** ${reason ?? "Not provided"}\n\nModerated by ${executor ?? "unknown"}`)
+        .setFooter({text: `Modlog #`})
         .setTimestamp(bannedAt);
     channel.send({embeds: [infractionLog]});
 
