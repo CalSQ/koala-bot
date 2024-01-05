@@ -9,6 +9,7 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     const logs = await member.guild.fetchAuditLogs({
         type: AuditLogEvent.MemberKick,
         limit: 1,
+        after: guildData.values.lastLog
     });
     const firstEntry = logs.entries.first();
     const kickedAt = new Date();

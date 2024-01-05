@@ -16,6 +16,7 @@ export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, 
     const logs = await guild.fetchAuditLogs({
         type: AuditLogEvent.MemberBanAdd,
         limit: 1,
+        after: guildData.values.lastLog
     });
     const firstEntry = logs.entries.first();
     const executor = firstEntry?.executorId && await client.users.fetch(firstEntry.executorId);
