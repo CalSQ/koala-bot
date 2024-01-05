@@ -13,6 +13,7 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     });
     const firstEntry = logs.entries.first();
     const kickedAt = new Date();
+    if (firstEntry) guildData.values.lastLog = firstEntry.id;
 
     console.log(logs)
 
@@ -25,7 +26,6 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
 
         const executor = firstEntry.executorId && await client.users.fetch(firstEntry.executorId);
         const logCount = ++guildData.values.modLogCount;
-        await guildData.save();
 
         // Send formatted infraction log in channel
         const infractionLog = new EmbedBuilder()
@@ -50,4 +50,5 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
         .setColor(client.config.colors.memberLog.leave ?? client.config.colors.default)
         .setTimestamp(kickedAt);
     channel.send({ embeds: [Embed] });
+    await guildData.save();
 })

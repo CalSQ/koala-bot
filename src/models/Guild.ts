@@ -9,7 +9,7 @@ interface IGuild {
       modLog?: string
     },
     modLogCount: number,
-    lastLog: string
+    lastLog?: string
   },
   metadata: {
     createdAt?: Date,
@@ -30,7 +30,7 @@ const GuildSchema = new Schema<IGuild, GuildModel>({
           memberLog: String // Log for member joins
       },
       modLogCount: { type: Number, default: 0 }, // Number of mod logs
-      lastLog: { type: String, default: "" }
+      lastLog: { type: String }
   },
   metadata: {
       createdAt: { type: Date, default: new Date() }, // When entry was created

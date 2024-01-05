@@ -10,18 +10,19 @@ export default event(Events.GuildBanAdd, false, async ({ client, log }, { user, 
     const channel = client.channels.cache.get(channelId);
     if (!channel?.isTextBased()) return;
     const logCount = ++guildData.values.modLogCount;
-    await guildData.save();
 
     // Get audit log
     const logs = await guild.fetchAuditLogs({
         type: AuditLogEvent.MemberBanAdd,
         limit: 1,
-        after: guildData.values.lastLog
+        after: guildData.values.lastLog ?? undefined
     });
     const firstEntry = logs.entries.first();
     const executor = firstEntry?.executorId && await client.users.fetch(firstEntry.executorId);
     const bannedAt = new Date();
     reason = reason ?? firstEntry?.reason
+    if (firstEntry) guildData.values.lastLog = firstEntry.id;
+    await guildData.save();
     
     // Send formatted log in logs channel
     const infractionLog = new EmbedBuilder()

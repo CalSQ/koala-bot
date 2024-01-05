@@ -19,6 +19,10 @@ export default event(Events.GuildBanRemove, false, async ({ client, log }, { use
     const firstEntry = logs.entries.first();
     const executor = firstEntry?.executorId && await client.users.fetch(firstEntry.executorId);
     const unbannedAt = new Date();
+    if (firstEntry) {
+        guildData.values.lastLog = firstEntry.id;
+        await guildData.save();
+    }
 
     // Send formatted log in logs channel
     const infractionLog = new EmbedBuilder()
