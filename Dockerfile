@@ -5,6 +5,6 @@ WORKDIR /workspace/bot
 COPY package*.json ./
 RUN bun install
 
-COPY src .
+COPY . .
 
 CMD ["bun", "run", "start"]
