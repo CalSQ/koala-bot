@@ -4,10 +4,6 @@ import { event } from "../../interfaces";
 
 export default event(Events.GuildMemberRemove, false, async ({ client, log }, member) => {
     const guildData = await Guild.getById(member.guild.id);
-    const channelId = guildData.values.options.memberLog;
-    if (!channelId) return;
-    const channel = client.channels.cache.get(channelId);
-    if (!channel?.isTextBased()) return;
 
     // Get audit log
     const logs = await member.guild.fetchAuditLogs({
@@ -16,10 +12,16 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
     });
     const firstEntry = logs.entries.first();
     const kickedAt = new Date();
-    
+
     console.log(logs)
 
     if (firstEntry) {
+        // Get log channel
+        const channelId = guildData.values.options.modLog;
+        if (!channelId) return;
+        const channel = client.channels.cache.get(channelId);
+        if (!channel?.isTextBased()) return;
+
         const executor = firstEntry.executorId && await client.users.fetch(firstEntry.executorId);
         const logCount = ++guildData.values.modLogCount;
         await guildData.save();
@@ -33,6 +35,12 @@ export default event(Events.GuildMemberRemove, false, async ({ client, log }, me
         channel.send({embeds: [infractionLog]});
     } 
 
+    // Get log channel
+    const channelId = guildData.values.options.memberLog;
+    if (!channelId) return;
+    const channel = client.channels.cache.get(channelId);
+    if (!channel?.isTextBased()) return;
+    
     // Send formatted member log in channel
     const Embed = new EmbedBuilder()
         .setAuthor({ name: member.user.username, iconURL: member.displayAvatarURL() })
