@@ -4,13 +4,15 @@
 
 */
 
-import { CommandCategory, category } from "../interfaces"
+import { CommandCategory, category } from "../interfaces";
 
+import config from "./slash/developer/config";
 import test from "./slash/developer/test";
 
 export const slashCategory = [
     category("testing" , [
-        test
+        test,
+        config
     ])
 ] as CommandCategory[]
 
