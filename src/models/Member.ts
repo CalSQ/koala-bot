@@ -1,17 +1,11 @@
 import { model, Schema, Model, HydratedDocument } from 'mongoose';
+import { Infraction } from '../interfaces';
 
 interface IMember  {
   userId: string,
   guildId: string,
   values: {
-    infractions: [{
-      action?: string,
-      reason?: string,
-      executor?: string,
-      at?: Date,
-      until?: Date
-      id: number
-    }],
+    infractions: Infraction[],
     xpMultiplier: number,
     xpAmount: number,
     levelAmount: number
@@ -30,7 +24,7 @@ const MemberSchema = new Schema<IMember, MemberModel>({
   userId: { type: String, required: true }, // User ID
   guildId: { type: String, required: true }, // Guild ID
   values: {
-      infractions: [{action: String, reason: String, executor: String, at: Date, until: Date, id: Number}],
+      infractions: [{action: String, modId: String, reason: String, until: Number, at: Number}],
       xpMultiplier: { type: Number, default: 1 },
       xpAmount: { type: Number, default: 0 },
       levelAmount: { type: Number, default: 1 },
