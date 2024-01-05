@@ -24,6 +24,6 @@ export default [
     guildMemberAdd,
     guildMemberRemove,
     guildBanAdd,
-    //guildBanRemove,
+    guildBanRemove,
     interactionCreate
 ] as Event[]
