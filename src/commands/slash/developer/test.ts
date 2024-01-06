@@ -17,7 +17,7 @@ export default command<ChatInputCommandInteraction>(build, async ({ client, inte
     if (!embed) return interaction.reply("Could not complete task sir. (3)");
     const copiedEmbed = EmbedBuilder.from(embed);
 
-    await logChannel.send(`* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n*\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n`);
+    await logChannel.send(`_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n_ _\n`);
     await logChannel.send({ embeds: [copiedEmbed] });
 
     interaction.reply("Done!");
