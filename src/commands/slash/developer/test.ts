@@ -8,12 +8,13 @@ const build = new SlashCommandBuilder()
 export default command<ChatInputCommandInteraction>(build, async ({ client, interaction }) => {
 
     const logChannel = client.channels.cache.get("1138924763155279884");
-    if (!logChannel?.isTextBased()) return interaction.reply("Could not complete task sir.");
+    if (!logChannel?.isTextBased()) return interaction.reply("Could not complete task sir. (1)");
 
-    const lastMessage = logChannel.lastMessage;
-    if (!lastMessage) return interaction.reply("Could not complete task sir.");
+    const lastMessage = await logChannel.messages.fetch({ limit: 1 });
+    if (!lastMessage) return interaction.reply("Could not complete task sir. (2)");
 
-    const embed = lastMessage.embeds[0];
+    const embed = lastMessage.first()?.embeds[0];
+    if (!embed) return interaction.reply("Could not complete task sir. (3)");
     const copiedEmbed = EmbedBuilder.from(embed);
 
     await logChannel.send(`* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n*\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n* *\n`);
