@@ -7,8 +7,6 @@
 import { Event } from "../interfaces"
 
 import clientReady from "./client/clientReady"
-import guildBanAdd from "./guild/guildBanAdd"
-import guildBanRemove from "./guild/guildBanRemove"
 import guildMemberAdd from "./guild/guildMemberAdd"
 import guildMemberRemove from "./guild/guildMemberRemove"
 import messageCreate from "./guild/messageCreate"
@@ -23,7 +21,5 @@ export default [
     messageUpdate,
     guildMemberAdd,
     guildMemberRemove,
-    guildBanAdd,
-    guildBanRemove,
     interactionCreate
 ] as Event[]
