@@ -6,5 +6,5 @@ const build = new SlashCommandBuilder()
     .setDescription('Developer commands')
 
 export default command<ChatInputCommandInteraction>(build, async ({ interaction }) => {
-    
+    interaction.reply("Working")
 })
