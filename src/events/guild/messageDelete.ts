@@ -4,6 +4,7 @@ import { Guild } from "../../models"
 
 export default event(Events.MessageDelete, false, async ({ client }, message) => {
     if (!message.guildId || !message.author) return;
+    if (message.author.bot) return;
     const guildData = await Guild.getById(message.guildId);
     const channelId = guildData.values.options.messageLog;
     if (channelId && channelId !== message.channelId) {
