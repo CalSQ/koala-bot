@@ -2,14 +2,15 @@ import { AuditLogEvent, EmbedBuilder, Events, time } from "discord.js"
 import { Guild, Member } from "../../models"
 import { Infraction, event } from "../../interfaces"
 
-export default event(Events.GuildAuditLogEntryCreate, false, async ({ client, log }, { executorId, targetId, reason, action }, guild) => {
-    
+export default event(Events.GuildAuditLogEntryCreate, false, async ({ client, log }, auditLog, guild) => {
+    const { executorId, targetId, reason, action } = auditLog
+
     if (!executorId || !targetId) return;
 
     switch (action) {
 
         case (AuditLogEvent.MemberUpdate): {
-            
+            console.log(auditLog);
             break;
         }
 
