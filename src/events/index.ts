@@ -7,6 +7,7 @@
 import { Event } from "../interfaces"
 
 import clientReady from "./client/clientReady"
+import guildAuditLogEntryCreate from "./guild/guildAuditLogEntryCreate"
 import guildMemberAdd from "./guild/guildMemberAdd"
 import guildMemberRemove from "./guild/guildMemberRemove"
 import messageCreate from "./guild/messageCreate"
@@ -21,5 +22,6 @@ export default [
     messageUpdate,
     guildMemberAdd,
     guildMemberRemove,
-    interactionCreate
+    interactionCreate,
+    guildAuditLogEntryCreate
 ] as Event[]
