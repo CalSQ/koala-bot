@@ -5,12 +5,14 @@ import { Infraction, event } from "../../interfaces"
 export default event(Events.GuildAuditLogEntryCreate, false, async ({ client, log }, auditLog, guild) => {
     const { executorId, targetId, reason, action } = auditLog
 
+    console.log(auditLog);
+
     if (!executorId || !targetId) return;
 
     switch (action) {
 
         case (AuditLogEvent.MemberUpdate): {
-            console.log(auditLog);
+            console.log("Member updated!");
             break;
         }
 
