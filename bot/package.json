@@ -1,0 +1,27 @@
+{
+  "name": "koala-bot",
+  "version": "0.1.0",
+  "author": "CS",
+  "license": "MIT",
+  "description": "",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "debug": "bun run --inspect src/index.ts",
+    "deploy": "bun run src/utils/deploy.ts"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.5",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.3",
+    "discord.js": "^14.13.0",
+    "mongoose": "^8.0.0",
+    "redis": "^4.6.12"
+  }
+}
