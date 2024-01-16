@@ -15,6 +15,7 @@ async function createInfraction(action: LogAction, guildId: Snowflake, target: U
 
 async function getLogChannel(client: ApplicationClient, guildId: Snowflake, type: LogChannelType): Promise<TextBasedChannel  | undefined> {
     const [guildData] = await Guild.fetchOneOrCreate(guildId);
+    if (!guildData) return;
     const channelId = guildData.values.options[type];
     if (!channelId) return;
     const channel = client.channels.cache.get(channelId);

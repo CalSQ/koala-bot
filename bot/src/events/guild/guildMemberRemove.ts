@@ -5,6 +5,7 @@ import { event } from "../../interfaces";
 export default event(Events.GuildMemberRemove, false, async ({ client, log }, member) => {
     // Get log channel
     const [guildData] = await Guild.fetchOneOrCreate(member.guild.id);
+    if (!guildData) return;
     const channelId = guildData.values.options.memberLog;
     if (!channelId) return;
     const channel = client.channels.cache.get(channelId);

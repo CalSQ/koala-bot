@@ -6,6 +6,7 @@ export default event(Events.MessageDelete, false, async ({ client }, message) =>
     if (!message.guildId || !message.author) return;
     if (message.author.bot) return;
     const [guildData] = await Guild.fetchOneOrCreate(message.guildId);
+    if (!guildData) return;
     const channelId = guildData.values.options.messageLog;
     if (channelId && channelId !== message.channelId) {
         const channel = client.channels.cache.get(channelId);
