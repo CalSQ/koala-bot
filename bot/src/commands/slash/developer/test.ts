@@ -2,6 +2,8 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { command } from "../../../interfaces"
 import { Guild } from "../../../models";
 import { redis } from "../../../utils";
+import axios from 'axios';
+import { resolveSync } from "bun";
 
 const build = new SlashCommandBuilder()
     .setName('test')
@@ -47,5 +49,4 @@ export default command<ChatInputCommandInteraction>(build, async ({ client, inte
         }
 
     }
-
 }, true)
