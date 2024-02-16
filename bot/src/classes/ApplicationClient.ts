@@ -1,5 +1,5 @@
 import { AnySelectMenuInteraction, ApplicationCommand, ButtonInteraction, ChatInputCommandInteraction, Client, ClientOptions, Collection, ContextMenuCommandInteraction, ModalSubmitInteraction, REST, Routes } from "discord.js";
-import { Command, Config, Event, Interaction } from "../interfaces";
+import { Command, Event, Interaction } from "../interfaces";
 import { config, deleteRequireCache } from "../utils"
 
 export default class ApplicationClient extends Client {
@@ -7,7 +7,6 @@ export default class ApplicationClient extends Client {
     /**
      * Properties
      */
-    public databaseConnected: boolean = false;
     readonly events: Collection<string, Event>;
     readonly commands: Collection<string, Command<ChatInputCommandInteraction>>;
     readonly contextMenus: Collection<string, Command<ContextMenuCommandInteraction>>;
@@ -33,7 +32,6 @@ export default class ApplicationClient extends Client {
         this.registerCommands()
         this.registerInteractions();
         this.registerEvents();
-
     };
 
     /**
@@ -111,10 +109,10 @@ export default class ApplicationClient extends Client {
     public async deploy(refresh: boolean = false) {
         if (refresh) this.registerCommands();
         const rest = new REST({ version: this.config.info.restVersion }).setToken(Bun.env.BOT_TOKEN!);
-        const globalCommands = this.commands.filter(cmd => cmd.developer !== true).map(({ build }) => build).flat()
-            .concat(this.contextMenus.filter(cmd => cmd.developer !== true).map(({ build }) => build).flat());
-        const devCommands = this.commands.filter(cmd => cmd.developer === true).map(({ build }) => build).flat()
-            .concat(this.contextMenus.filter(cmd => cmd.developer === true).map(({ build }) => build).flat());
+        const globalCommands = this.commands.filter(cmd => !cmd.args.developer).map(({ build }) => build).flat()
+            .concat(this.contextMenus.filter(cmd => !cmd.args.developer).map(({ build }) => build).flat());
+        const devCommands = this.commands.filter(cmd => cmd.args.developer === true).map(({ build }) => build).flat()
+            .concat(this.contextMenus.filter(cmd => cmd.args.developer === true).map(({ build }) => build).flat());
         
         if (!this.user?.id) return console.warn("[ DEPLOY ]: Application ID missing (Global Commands)");
 

@@ -13,7 +13,7 @@ const build = new SlashCommandBuilder()
         .addChannelOption(o => o.setName('channel').setDescription('The channel to log information to')))
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 
-export default command<ChatInputCommandInteraction>(build, async ({ client, interaction, log }) => {
+export default command<ChatInputCommandInteraction>(build, {}, async ({ client, interaction, log }) => {
     const subCommand = interaction.options.getSubcommand()
     if (!interaction.guild) return;
     switch (subCommand) {

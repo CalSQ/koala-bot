@@ -2,8 +2,6 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { command } from "../../../interfaces"
 import { Guild } from "../../../models";
 import { redis } from "../../../utils";
-import axios from 'axios';
-import { resolveSync } from "bun";
 
 const build = new SlashCommandBuilder()
     .setName('test')
@@ -18,7 +16,7 @@ const build = new SlashCommandBuilder()
         .setName("check")
         .setDescription("Check if data is in cache"))
 
-export default command<ChatInputCommandInteraction>(build, async ({ client, interaction }) => {
+export default command<ChatInputCommandInteraction>(build, { developer: true }, async ({ client, interaction }) => {
     const subCommand = interaction.options.getSubcommand()
     if (!interaction.guildId) return interaction.reply("Failed.");
 
@@ -49,4 +47,4 @@ export default command<ChatInputCommandInteraction>(build, async ({ client, inte
         }
 
     }
-}, true)
+})

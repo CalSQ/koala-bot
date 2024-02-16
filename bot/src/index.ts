@@ -21,7 +21,6 @@ client.login(Bun.env.BOT_TOKEN).then(async () => {
     await connect(Bun.env.DB_URL, {
         autoIndex: true
     } as ConnectOptions).then(() => {
-        client.databaseConnected = true
         console.log(`[ Mongo: CONNECTED ] - Connected to the database.`);
     }).catch(err => {
         throw new Error(`[ Mongo: ERROR ] - ${err}`);

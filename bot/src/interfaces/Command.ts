@@ -14,10 +14,15 @@ export type CommandCallback<T> = (
     props: CommandProps<T>
 ) => Awaitable<unknown>
 
+export interface CommandArgs {
+    developer?: boolean,
+    cooldown?: number
+}
+
 export interface Command<T extends CommandInteraction> {
     build: CommandBuild,
-    callback: CommandCallback<T>,
-    developer: boolean
+    args: CommandArgs,
+    callback: CommandCallback<T>
 }
 
 export interface CommandCategory {
@@ -25,11 +30,11 @@ export interface CommandCategory {
     commands: Command<CommandInteraction>[]
 }
 
-export function command<T extends CommandInteraction>(build: CommandBuild, callback: CommandCallback<T>, developer: boolean = false): Command<T> {
+export function command<T extends CommandInteraction>(build: CommandBuild, args: CommandArgs = { developer: false, cooldown: 0 }, callback: CommandCallback<T>): Command<T> {
     return {
         build,
-        callback,
-        developer
+        args,
+        callback
     }
 }
 
