@@ -6,7 +6,7 @@ import {
 } from "discord.js"
 import { command } from "../../../interfaces"
 
-const serverAddress = "play.istealbabiesfor.fun"
+const serverAddress = "51.161.87.73:25572"
 
 const build = new SlashCommandBuilder()
   .setName("mc")
