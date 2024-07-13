@@ -33,7 +33,10 @@ export default command<ChatInputCommandInteraction>(
     const userToPing = interaction.options.getUser("user", true)
 
     if (!interaction.guild) return
-    if (interaction.user.id !== client.config.info.developerId)
+    if (
+      interaction.user.id !== client.config.info.developerId &&
+      interaction.user.id !== "1045011641940574208"
+    )
       return interaction.reply(
         "🟥 Such a powerful command can not be used by mere mortals!"
       )
