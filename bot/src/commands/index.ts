@@ -7,11 +7,11 @@
 import { CommandCategory, category } from "../interfaces"
 
 import config from "./slash/util/config"
+import dm from "./slash/util/dm"
 import mc from "./slash/util/mc"
-import pingmayhem from "./slash/util/pingmayhem"
 
 export const slashCategory = [
-  category("util", [config, mc, pingmayhem]),
+  category("util", [config, mc, dm]),
 ] as CommandCategory[]
 
 export const contextCategory = [category("developer", [])] as CommandCategory[]

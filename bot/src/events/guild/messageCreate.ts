@@ -11,14 +11,6 @@ export default event(
       //////////////////////////////////////////////////////////////////////////
 
       switch (msgArguments[0]) {
-        case ".checksys": {
-          message.reply({ content: "✅" })
-          break
-        }
-        case ".disable": {
-          message.reply({ content: "Disabled relevent category" })
-          break
-        }
       }
 
       //////////////////////////////////////////////////////////////////////////
