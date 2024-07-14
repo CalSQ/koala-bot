@@ -25,11 +25,15 @@ export default command<ChatInputCommandInteraction>(
     try {
       const dm = await user.createDM()
       await dm.send(message)
-      await interaction.reply("🟩 DM sent successfully")
+      await interaction.reply({
+        content: "🟩 DM sent successfully",
+        ephemeral: true,
+      })
     } catch (err) {
-      await interaction.reply(
-        "🟥 An error occurred while sending DM,\n${err.message}"
-      )
+      await interaction.reply({
+        content: "🟥 An error occurred while sending DM,\n${err.message}",
+        ephemeral: true,
+      })
     }
   }
 )
