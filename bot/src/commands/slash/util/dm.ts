@@ -19,10 +19,7 @@ export default command<ChatInputCommandInteraction>(
     const user = interaction.options.getUser("user", true)
     const message = interaction.options.getString("message", true)
 
-    if (
-      interaction.user.id !== client.config.info.developerId &&
-      interaction.user.id !== "862798294698426388"
-    )
+    if (interaction.user.id !== client.config.info.developerId)
       return interaction.reply("🟥 Command can not be used by mere mortals!")
 
     try {
