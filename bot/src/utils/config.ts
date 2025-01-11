@@ -3,7 +3,7 @@ import { Config } from "../interfaces"
 export const config = {
   info: {
     developerId: "589546428137865217",
-    developerGuild: "690342051778396403",
+    developerGuild: "",
     restVersion: "10",
   },
 
